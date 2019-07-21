@@ -1,0 +1,9 @@
+package com.example.ratingdataservice.model;
+
+public class Rating {
+	
+	private int movieId;
+	
+	private int rating;
+
+}

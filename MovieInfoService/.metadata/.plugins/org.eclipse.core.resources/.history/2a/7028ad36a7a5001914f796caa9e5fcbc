@@ -1,0 +1,6 @@
+package com.example.movieinfoservice.controller;
+
+@RestController
+public class MovieController {
+
+}

@@ -1,0 +1,7 @@
+package com.example.ratingdataservice.controller;
+
+@RestController
+@RequestMapping("/rating")
+public class RatingController {
+
+}

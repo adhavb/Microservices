@@ -1,0 +1,15 @@
+package com.example.movieinfoservice.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MovieController {
+	
+	@GetMapping("/{userId}")
+	public List<CatalogItem> getCatalog(@PathVariable String userId){
+		return Collections.singletonList(
+				new CatalogItem("Transformer", "Action", 5)
+				);
+	}
+
+}

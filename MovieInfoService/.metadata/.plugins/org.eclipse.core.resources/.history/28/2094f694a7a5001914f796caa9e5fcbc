@@ -1,0 +1,11 @@
+package com.example.movieinfoservice.model;
+
+public class Movie {
+	
+	private int movieId;
+	
+	private String movieName;
+	
+	
+
+}

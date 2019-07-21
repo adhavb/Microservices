@@ -1,0 +1,53 @@
+package com.example.moviecatalogservice.controller;
+
+
+import java.util.Collections;
+import java.util.List;
+
+import java.util.Arrays;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.example.moviecatalogservice.model.CatalogItem;
+import com.example.moviecatalogservice.model.Movie;
+import com.example.moviecatalogservice.model.Rating;
+
+@RestController
+@RequestMapping("/catalog")
+public class MovieCatalogController {
+	
+	@Autowired
+	RestTemplate restTemplate;
+	
+	@Autowired
+	WebClient.Builder builder;
+	
+	@GetMapping("/{userId}")
+	public List<CatalogItem> getCatalog(@PathVariable String userId){
+		List<Rating> ratings = Arrays.asList(
+				new Rating(1,4),
+				new Rating(2,4),
+				new Rating(3,5)
+				);
+		ratings.stream().map(rating -> {
+			builder.build()
+			.get()
+			.uri("http://localhost:8081/movies/"+rating.getMovieId())
+			.retrieve()
+			.bodyToMono(Movie.class)//Mono means get the response in the future(asynchronously) and not immediately(synchronously)
+			.block();
+		});
+		
+		String url = "http://localhost:8081/movies/2";
+		Movie movie = restTemplate.getForObject(url, Movie.class);
+		return Collections.singletonList(
+				new CatalogItem("Transformer", "Action", 5)
+				);
+	}
+
+}

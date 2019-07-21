@@ -1,0 +1,5 @@
+package com.example.ratingdataservice.controller;
+
+public class RatingController {
+
+}
